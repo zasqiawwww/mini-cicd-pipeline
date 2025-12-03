@@ -1,4 +1,4 @@
-const { tambah, kurang, kali, bagi } = require('../src/app');
+const { tambah, kurang, kali, bagi, pangkat } = require('../src/app');
 
 // Test untuk fungsi tambah
 describe('Test Fungsi Kalkulator', () => {
@@ -27,5 +27,11 @@ describe('Test Fungsi Kalkulator', () => {
   test('Fungsi bagi harus error jika dibagi nol', () => {
     expect(() => bagi(10, 0)).toThrow('Tidak bisa dibagi nol!');
   });
+
+  test('Fungsi pangkat harus mengembalikan hasil perpangkatan', () => {
+  expect(pangkat(2, 3)).toBe(8);
+  expect(pangkat(5, 2)).toBe(25);
+  expect(pangkat(10, 0)).toBe(1);
+});
 
 });

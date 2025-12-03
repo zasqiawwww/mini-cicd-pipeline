@@ -15,6 +15,10 @@ function bagi(a, b) {
     throw new Error('Tidak bisa dibagi nol!');
   }
   return a / b;
+
+}
+function pangkat(a, b) {
+  return Math.pow(a, b);
 }
 
-module.exports = { tambah, kurang, kali, bagi };
+module.exports = { tambah, kurang, kali, bagi, pangkat };
