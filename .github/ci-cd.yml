@@ -1,0 +1,44 @@
+name: CI/CD Pipeline
+
+# Kapan workflow ini akan berjalan?
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+# Pekerjaan yang akan dilakukan
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Langkah 1: Ambil kode dari repository
+    - name: Checkout kode
+      uses: actions/checkout@v3
+    
+    # Langkah 2: Setup Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    # Langkah 3: Install dependencies
+    - name: Install dependencies
+      run: npm install
+    
+    # Langkah 4: Jalankan test
+    - name: Jalankan test otomatis
+      run: npm test
+    
+    # Langkah 5: Generate laporan coverage
+    - name: Generate test coverage
+      run: npm run test:coverage
+    
+    # Langkah 6: Upload hasil test
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-coverage-report
+        path: coverage/
